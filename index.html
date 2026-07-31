@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TharaFlow | Smart Project Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= LOGIN PAGE ================= -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-card">
+
+        <div class="logo-area">
+            <i class="fa-solid fa-layer-group"></i>
+            <h1>TharaFlow</h1>
+            <p>Smart Project Management System</p>
+        </div>
+
+        <div class="tabs">
+            <button id="loginTab" class="active">Login</button>
+            <button id="signupTab">Sign Up</button>
+        </div>
+
+        <!-- LOGIN -->
+
+        <div id="loginForm">
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Username">
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password">
+
+            <button id="loginBtn">
+
+                Login
+
+            </button>
+
+        </div>
+
+        <!-- SIGNUP -->
+
+        <div id="signupForm" style="display:none;">
+
+            <input
+                type="text"
+                id="signupUsername"
+                placeholder="Username">
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Password">
+
+            <button id="signupBtn">
+
+                Create Account
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="app" style="display:none;">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-layer-group"></i>
+
+        <h2>TharaFlow</h2>
+
+    </div>
+
+    <ul>
+
+        <li class="nav-item active" data-page="dashboard">
+
+            <i class="fa-solid fa-table-columns"></i>
+
+            Dashboard
+
+        </li>
+
+        <li class="nav-item" data-page="projects">
+
+            <i class="fa-solid fa-folder-open"></i>
+
+            Projects
+
+        </li>
+
+        <li class="nav-item" data-page="tasks">
+
+            <i class="fa-solid fa-list-check"></i>
+
+            Tasks
+
+        </li>
+
+        <li class="nav-item" data-page="team">
+
+            <i class="fa-solid fa-users"></i>
+
+            Team
+
+        </li>
+
+        <li class="nav-item" data-page="calendar">
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            Calendar
+
+        </li>
+
+        <li class="nav-item" data-page="analytics">
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            Analytics
+
+        </li>
+
+        <li class="nav-item" data-page="settings">
+
+            <i class="fa-solid fa-gear"></i>
+
+            Settings
+
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<div class="main-content">
+
+<header>
+
+<div class="header-left">
+
+<h1 id="pageTitle">
+
+Dashboard
+
+</h1>
+
+<p>
+
+Manage your projects efficiently.
+
+</p>
+
+</div>
+
+<div class="header-right">
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search projects or tasks">
+
+</div>
+
+<button id="darkModeBtn">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+<div class="profile">
+
+<img
+id="profileImage"
+src="https://i.pravatar.cc/100"
+alt="Profile">
+
+<span id="profileName">
+
+Guest
+
+</span>
+
+</div>
+
+</div>
+
+</header>
+<!-- ================= DASHBOARD PAGE ================= -->
+
+<section class="page active-page" id="dashboard">
+
+<div class="dashboard-cards">
+
+<div class="card blue">
+
+<h3>Total Projects</h3>
+
+<h1 id="totalProjects">0</h1>
+
+</div>
+
+<div class="card green">
+
+<h3>Completed Tasks</h3>
+
+<h1 id="completedTasks">0</h1>
+
+</div>
+
+<div class="card orange">
+
+<h3>Pending Tasks</h3>
+
+<h1 id="pendingTasks">0</h1>
+
+</div>
+
+<div class="card red">
+
+<h3>Team Members</h3>
+
+<h1 id="teamCount">0</h1>
+
+</div>
+
+</div>
+
+<div class="quick-actions">
+
+<button id="newProjectBtn">
+
+<i class="fa-solid fa-folder-plus"></i>
+
+New Project
+
+</button>
+
+<button id="newTaskBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Task
+
+</button>
+
+<button id="newMemberBtn">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Add Member
+
+</button>
+
+</div>
+
+<h2>Recent Projects</h2>
+
+<div id="recentProjects" class="board-grid">
+
+</div>
+
+</section>
+
+<!-- ================= PROJECT PAGE ================= -->
+
+<section class="page" id="projects">
+
+<div class="page-header">
+
+<h2>Project Board</h2>
+
+<button id="addProjectPage">
+
+<i class="fa-solid fa-plus"></i>
+
+Create Project
+
+</button>
+
+</div>
+
+<div id="projectBoard" class="board-grid">
+
+</div>
+
+</section>
+
+<!-- ================= TASK PAGE ================= -->
+
+<section class="page" id="tasks">
+
+<div class="page-header">
+
+<h2>Task Board</h2>
+
+<button id="addTaskPage">
+
+<i class="fa-solid fa-plus"></i>
+
+Assign Task
+
+</button>
+
+</div>
+
+<div id="taskBoard" class="board-grid">
+
+</div>
+
+</section>
+
+<!-- ================= TEAM PAGE ================= -->
+
+<section class="page" id="team">
+
+<div class="page-header">
+
+<h2>Team Members</h2>
+
+<button id="addMemberPage">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Add Member
+
+</button>
+
+</div>
+
+<div id="teamBoard" class="board-grid">
+
+</div>
+
+</section>
+
+<!-- ================= CALENDAR PAGE ================= -->
+
+<section class="page" id="calendar">
+
+<h2>Upcoming Deadlines</h2>
+
+<div id="calendarBoard">
+
+<p>No deadlines available.</p>
+
+</div>
+
+</section>
+
+<!-- ================= ANALYTICS PAGE ================= -->
+
+<section class="page" id="analytics">
+
+<h2>Analytics</h2>
+
+<div class="dashboard-cards">
+
+<div class="card">
+
+<h3>Total Projects</h3>
+
+<h1 id="analyticsProjects">0</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Total Tasks</h3>
+
+<h1 id="analyticsTasks">0</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Completed</h3>
+
+<h1 id="analyticsCompleted">0</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Pending</h3>
+
+<h1 id="analyticsPending">0</h1>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SETTINGS PAGE ================= -->
+
+<section class="page" id="settings">
+
+<h2>Profile Settings</h2>
+
+<div class="settings-card">
+
+<img
+id="settingsProfileImage"
+src="https://i.pravatar.cc/120">
+
+<input
+type="file"
+id="profileUpload">
+
+<input
+type="text"
+id="displayName"
+placeholder="Display Name">
+
+<button id="saveProfile">
+
+Save Profile
+
+</button>
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+</div>
+
+</section>
+<!-- ================= CREATE PROJECT MODAL ================= -->
+
+<div class="modal" id="projectModal">
+
+    <div class="modal-box">
+
+        <span class="close" id="closeProject">&times;</span>
+
+        <h2>Create Project</h2>
+
+        <input
+            type="text"
+            id="projectName"
+            placeholder="Project Name">
+
+        <textarea
+            id="projectDescription"
+            placeholder="Project Description"></textarea>
+
+        <input
+            type="date"
+            id="projectDeadline">
+
+        <select id="projectPriority">
+
+            <option value="High">High Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="Low">Low Priority</option>
+
+        </select>
+
+        <button id="saveProject">
+
+            Save Project
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= CREATE TASK MODAL ================= -->
+
+<div class="modal" id="taskModal">
+
+    <div class="modal-box">
+
+        <span class="close" id="closeTask">&times;</span>
+
+        <h2>Create Task</h2>
+
+        <input
+            type="text"
+            id="taskTitle"
+            placeholder="Task Title">
+
+        <textarea
+            id="taskDescription"
+            placeholder="Task Description"></textarea>
+
+        <select id="taskProject">
+
+            <option value="">Select Project</option>
+
+        </select>
+
+        <select id="taskMember">
+
+            <option value="">Assign Member</option>
+
+        </select>
+
+        <input
+            type="date"
+            id="taskDeadline">
+
+        <select id="taskStatus">
+
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+
+        </select>
+
+        <button id="saveTask">
+
+            Save Task
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= TEAM MEMBER MODAL ================= -->
+
+<div class="modal" id="memberModal">
+
+    <div class="modal-box">
+
+        <span class="close" id="closeMember">&times;</span>
+
+        <h2>Add Team Member</h2>
+
+        <input
+            type="text"
+            id="memberName"
+            placeholder="Member Name">
+
+        <input
+            type="email"
+            id="memberEmail"
+            placeholder="Email">
+
+        <button id="saveMember">
+
+            Add Member
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= COMMENT MODAL ================= -->
+
+<div class="modal" id="commentModal">
+
+    <div class="modal-box">
+
+        <span class="close" id="closeComment">&times;</span>
+
+        <h2>Task Comments</h2>
+
+        <div id="commentList">
+
+        </div>
+
+        <textarea
+            id="newComment"
+            placeholder="Write a comment..."></textarea>
+
+        <button id="addComment">
+
+            Add Comment
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="toastText">
+
+        Success
+
+    </span>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 TharaFlow | CodeAlpha Project Management Tool
+
+    </p>
+
+</footer>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
